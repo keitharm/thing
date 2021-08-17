@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  ting:
+    build:
+      context: ./bot
+      target: dev
+    volumes:
+      - ./bot:/app:cached
+      # Hack to prevent baked in node_modules from being overridden
+      - /app/node_modules
+    env_file:
+      - ./bot/.env
+
+  mongo:
+    image: mongo
